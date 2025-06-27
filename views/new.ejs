@@ -11,7 +11,7 @@
     <h1> Add New Food</h1>
     <form action="/users/<%= user._id %>/foods" method="POST">
    <label for="name">Name:</label>
-   <input type="text" name="'name" id="name">
+   <input type="text" name="name" id="name">
    <label for="foodGroup">Food Group:</label>
     <select id="foodGroup" name="foodGroup" required>
       <option value="">--Select--</option>
@@ -28,7 +28,7 @@
         <input type="checkbox" name="readyToEat" />
         Ready to Eat
       </label><br/>
-  
+      <button type="submit">Add food</button>
    
     </form>
 

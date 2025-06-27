@@ -7,6 +7,19 @@
 </head>
 <body>
     <h1>Welcome to my Pantry</h1>
+    <% if (pantry && pantry.length > 0) { %>
+        <ul>
+          <% pantry.forEach(item => { %>
+            <li>
+              <strong><%= item.name %></strong> - <%= item.foodGroup %>
+              <% if (item.readyToEat) { %> ✔️ Ready to eat <% } else { %> ❌ Not ready <% } %>
+              <% if (item.notes) { %> <br>Notes: <%= item.notes %> <% } %>
+            </li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p>No food items in your pantry yet.</p>
+      <% } %>
     <a href="foods/new">Add a New Item</a>
 </body>
 </html>
