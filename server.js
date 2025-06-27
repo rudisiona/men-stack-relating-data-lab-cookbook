@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
-
+app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 // app.use(morgan('dev'));
@@ -36,7 +36,9 @@ app.get('/', (req, res) => {
     user: req.session.user,
   });
 });
-
+// app.get('/test', (req, res) => {
+//   res.render('foods/index.ejs', { userId: 'test123'})
+// })
 app.get('/vip-lounge', (req, res) => {
   if (req.session.user) {
     res.send(`Welcome to the party ${req.session.user.username}.`);
@@ -45,10 +47,12 @@ app.get('/vip-lounge', (req, res) => {
   }
 });
 
+
+
 app.use(passUserToView)
 app.use('/auth', authController);
 app.use(isSignedIn)
-app.use('/users/:userId/food', foodController)
+app.use('/', foodController)
 
 
 app.listen(port, () => {

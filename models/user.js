@@ -15,10 +15,6 @@ const foodSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  favoriteFood: {
-    type: Boolean,
-    default: false
-  },
   notes: {
     type: String,
   },
