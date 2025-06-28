@@ -60,6 +60,25 @@ router.get('/users/:userId/foods/:itemId/edit', async (req, res) => {
   res.render('edit.ejs')
 } )
 
+router.put('/users/:userId/foods/:itemId', async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id);
+    const foodItem = currentUser.pantry.id(req.params.itemId);
+    foodItem.set({
+      name: req.body.name,
+      foodGroup: req.body.foodGroup,
+      readyToEat: req.body.readyToEat === 'on',
+      notes: req.body.notes
+    });
+    await currentUser.save();
+    res.redirect(`/users/${currentUser._id}/foods`);
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
+  }
+});
+
+
 const User = require('../models/user.js');
 
 module.exports = router;
