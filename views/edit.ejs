@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Food</title>
+</head>
+<body>
+  <h1>Edit Food Item</h1>
+  <form action="/users/<%= food._id %>?_method=PUT" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" value="<%= food.name %>" required>
+
+    <label for="foodGroup">Food Group:</label>
+    <select id="foodGroup" name="foodGroup" required>
+      <option value="Fruit" <%= food.foodGroup === 'Fruit' ? 'selected' : '' %>>Fruit</option>
+      <option value="Vegetables" <%= food.foodGroup === 'Vegetables' ? 'selected' : '' %>>Vegetables</option>
+      <option value="Grain" <%= food.foodGroup === 'Grain' ? 'selected' : '' %>>Grain</option>
+      <option value="Protein" <%= food.foodGroup === 'Protein' ? 'selected' : '' %>>Protein</option>
+      <option value="Dairy" <%= food.foodGroup === 'Dairy' ? 'selected' : '' %>>Dairy</option>
+      <option value="Junk" <%= food.foodGroup === 'Junk' ? 'selected' : '' %>>Junk</option>
+    </select>
+
+    <label for="notes">Notes:</label>
+    <textarea name="notes" id="notes"><%= food.notes %></textarea>
+
+    <label>
+      <input type="checkbox" name="readyToEat" <%= food.readyToEat ? 'checked' : '' %> />
+      Ready to Eat
+    </label><br/>
+
+    <button type="submit">Update Food</button>
+  </form>
+</body>
+</html>

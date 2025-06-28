@@ -5,8 +5,6 @@ router.get('/users/:userId/foods', async (req, res) => {
   try {
     const currentUser = await User.findById(req.session.user._id);
 
-    if (!currentUser) throw new Error('User not found');
-
     res.render('foods/index.ejs', { pantry: currentUser.pantry,
       userId: currentUser._id.toString()
      });
@@ -54,6 +52,13 @@ router.delete('/users/:userId/foods/:foodId', async (req, res) => {
       res.redirect('/')
     }
 })
+
+router.get('/users/:userId/foods/:itemId/edit', async (req, res) => {
+  const currentUser = await User.findById(req.session.user._id);
+  const foodItem = currentUser.pantry.id(req.params.itemId);
+  res.locals.food = foodItem;
+  res.render('edit.ejs')
+} )
 
 const User = require('../models/user.js');
 
